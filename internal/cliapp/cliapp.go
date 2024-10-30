@@ -4,8 +4,8 @@ import (
 	"flag"
 	"os"
 
-	"github.com/szeist/roomba-go/pkg/config"
-	"github.com/szeist/roomba-go/pkg/roomba"
+	"github.com/vbargl/go-roomba/pkg/config"
+	"github.com/vbargl/go-roomba/pkg/roomba"
 )
 
 const passwordArgName string = "password"

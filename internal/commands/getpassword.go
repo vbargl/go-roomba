@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/szeist/roomba-go/pkg/roombapass"
+	"github.com/vbargl/go-roomba/pkg/roombapass"
 )
 
 func GetPassword() {

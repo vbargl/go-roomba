@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/szeist/roomba-go/pkg/roomba"
+	"github.com/vbargl/go-roomba/pkg/roomba"
 )
 
 func Status(roombaClient *roomba.Roomba) {

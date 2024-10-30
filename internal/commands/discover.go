@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/szeist/roomba-go/pkg/discover"
+	"github.com/vbargl/go-roomba/pkg/discover"
 )
 
 func Discover() {

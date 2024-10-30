@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/szeist/roomba-go/pkg/roomba"
+	"github.com/vbargl/go-roomba/pkg/roomba"
 )
 
 func InteractiveMode(roombaClient *roomba.Roomba) {

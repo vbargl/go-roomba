@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/szeist/roomba-go/internal/cliapp"
-	"github.com/szeist/roomba-go/internal/commands"
-	"github.com/szeist/roomba-go/pkg/osargs"
+	"github.com/vbargl/go-roomba/internal/cliapp"
+	"github.com/vbargl/go-roomba/internal/commands"
+	"github.com/vbargl/go-roomba/pkg/osargs"
 )
 
 func main() {

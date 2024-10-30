@@ -11,8 +11,8 @@ import (
 	"time"
 
 	mqtt "github.com/eclipse/paho.mqtt.golang"
-	"github.com/szeist/roomba-go/pkg/config"
-	"github.com/szeist/roomba-go/pkg/status"
+	"github.com/vbargl/go-roomba/pkg/config"
+	"github.com/vbargl/go-roomba/pkg/status"
 )
 
 const statusPollIntervalMs time.Duration = 500

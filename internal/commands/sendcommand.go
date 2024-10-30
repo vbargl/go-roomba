@@ -5,7 +5,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/szeist/roomba-go/pkg/roomba"
+	"github.com/vbargl/go-roomba/pkg/roomba"
 )
 
 const statusWaitTimeoutMs time.Duration = 2000

@@ -35,7 +35,22 @@ func (r *Roomba) stateMessageHandler(client mqtt.Client, msg mqtt.Message) {
 	r.statusMutex.Lock()
 	statusValue := reflect.ValueOf(r.status).Elem()
 	for field, value := range reportedState.State.Reported {
-		statusValue.FieldByName(strings.Title(field)).Set(reflect.ValueOf(value))
+		f := getFieldByTag(field, statusValue)
+		if f.IsValid() {
+			f.Set(reflect.ValueOf(value))
+		} else if r.debug {
+			log.Printf("Field %s not found in status struct", field)
+		}
 	}
 	r.statusMutex.Unlock()
+}
+
+func getFieldByTag(tag string, v reflect.Value) reflect.Value {
+	for i := 0; i < v.NumField(); i++ {
+		tagContent := v.Type().Field(i).Tag.Get("json")
+		if strings.Split(tagContent, ",")[0] == tag {
+			return v.Field(i)
+		}
+	}
+	return reflect.Value{}
 }

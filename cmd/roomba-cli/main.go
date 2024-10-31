@@ -22,6 +22,8 @@ func main() {
 		commands.Discover()
 	case "get-password":
 		commands.GetPassword()
+	case "get-password-cloud":
+		commands.GetPasswordCloud()
 	case "status":
 		initApp(app, subcommand)
 		commands.Status(app.GetClient())
@@ -62,11 +64,12 @@ func cleanup(app *cliapp.App) {
 func printHelp() {
 	fmt.Fprintf(os.Stderr, `Usage: %s [command] [--help | arguments]
 Available commands:
-	discover      Discovers roomba on connected networks
-	get-password  Get roomba password
-	status        Get latest status info
-	cmd           Send command to roomba
-	interactive   Interactive mode
+	discover            Discovers roomba on connected networks
+	get-password        Get roomba password
+	get-password-cloud  Get roomba password from cloud
+	status              Get latest status info
+	cmd                 Send command to roomba
+	interactive         Interactive mode
 `, os.Args[0])
 }
 

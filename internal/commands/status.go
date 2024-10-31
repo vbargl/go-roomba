@@ -10,7 +10,7 @@ import (
 
 func Status(roombaClient *roomba.Roomba) {
 	status := roombaClient.GetStatus(10000)
-	jsonStatus, err := json.Marshal(status)
+	jsonStatus, err := json.MarshalIndent(status, "", "  ")
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "ERROR: %s\n", err)
 	}

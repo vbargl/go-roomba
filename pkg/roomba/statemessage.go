@@ -3,8 +3,6 @@ package roomba
 import (
 	"encoding/json"
 	"log"
-	"reflect"
-	"strings"
 
 	mqtt "github.com/eclipse/paho.mqtt.golang"
 )
@@ -14,7 +12,7 @@ type stateMessage struct {
 }
 
 type reportedMessage struct {
-	Reported map[string]any `json:"reported"`
+	Reported json.RawMessage `json:"reported"`
 }
 
 func (r *Roomba) stateMessageHandler(client mqtt.Client, msg mqtt.Message) {
@@ -30,27 +28,13 @@ func (r *Roomba) stateMessageHandler(client mqtt.Client, msg mqtt.Message) {
 	err := json.Unmarshal(msg.Payload(), &reportedState)
 	if err != nil {
 		log.Printf("Roomba state unmarshal error: %s", err.Error())
+		return
 	}
 
 	r.statusMutex.Lock()
-	statusValue := reflect.ValueOf(r.status).Elem()
-	for field, value := range reportedState.State.Reported {
-		f := getFieldByTag(field, statusValue)
-		if f.IsValid() {
-			f.Set(reflect.ValueOf(value))
-		} else if r.debug {
-			log.Printf("Field %s not found in status struct", field)
-		}
+	defer r.statusMutex.Unlock()
+	err = json.Unmarshal(reportedState.State.Reported, r.status)
+	if err != nil {
+		log.Printf("Roomba status unmarshal error: %s", err.Error())
 	}
-	r.statusMutex.Unlock()
-}
-
-func getFieldByTag(tag string, v reflect.Value) reflect.Value {
-	for i := 0; i < v.NumField(); i++ {
-		tagContent := v.Type().Field(i).Tag.Get("json")
-		if strings.Split(tagContent, ",")[0] == tag {
-			return v.Field(i)
-		}
-	}
-	return reflect.Value{}
 }

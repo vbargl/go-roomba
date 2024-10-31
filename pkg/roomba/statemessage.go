@@ -14,7 +14,7 @@ type stateMessage struct {
 }
 
 type reportedMessage struct {
-	Reported map[string]interface{} `json:"reported"`
+	Reported map[string]any `json:"reported"`
 }
 
 func (r *Roomba) stateMessageHandler(client mqtt.Client, msg mqtt.Message) {
